@@ -1,0 +1,47 @@
+Attribute VB_Name = "Extração"
+
+Private Sub CommandButton1_Click()
+
+
+
+5:      Dim SAPFunc As Object
+6:      Set SAPFunc = GetObject("SAPGUI").GetScriptingEngine
+7:      SAPFunc.findById("ses[0]").findById("wnd[0]").maximize
+8:      SAPFunc.findById("ses[0]").findById("wnd[0]/tbar[0]/okcd").Text = "S_ALR_87013019"
+9:      SAPFunc.findById("ses[0]").findById("wnd[0]").sendVKey 0
+    
+11:      SAPFunc.findById("ses[0]").findById("wnd[0]/usr/txt$6-KOKRS").Text = "BR01"
+    
+      
+  
+  
+16:      Dim cel As Range
+17:      Dim rng As Range
+Set rng = Range("A40:A40")
+     
+20:      For Each cel In rng
+  
+  
+23:     SAPFunc.findById("ses[0]").findById("wnd[0]/usr/ctxt_6ORDGRP-LOW").Text = cel.Value
+  
+  
+  
+27:     SAPFunc.findById("ses[0]").findById("wnd[0]").sendVKey 8
+28:     'SAPFunc.findById("wnd[0]/usr/txt$6-KOKRS").caretPosition = 2
+29:    'SAPFunc.findById("wnd[0]").sendVKey 0
+  
+  
+32:      cel.Offset(0, 1) = SAPFunc.findById("ses[0]").findById("wnd[0]/usr/lbl[110,8]").Text
+33:         SAPFunc.findById("ses[0]").findById("wnd[0]/tbar[0]/btn[3]").press
+34:        'SAPFunc.findById("wnd[1]/usr/btnSPOP-OPTION1").press
+35:        'SAPGuiSession.findById("usr/btnBUTTON_YES").press
+      
+37:        SAPFunc.findById("ses[0]").findById("wnd[1]/usr/btnBUTTON_YES").press
+      
+          
+40:         Next cel
+  
+42:     MsgBox info
+43:        SAPFunc.EndSession
+  
+45:    End Sub
